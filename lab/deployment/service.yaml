@@ -2,11 +2,26 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: api
-  name: api
+    app: headers
+  name: headers
 spec:
   ports:
     - name: http
       port: 8080
   selector:
-    app: api
+    app: headers
+---
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  name: headers-gateway
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+    - port:
+        number: 80
+        name: http
+        protocol: HTTP
+      hosts:
+        - "*"

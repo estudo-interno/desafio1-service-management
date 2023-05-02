@@ -1,27 +1,27 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: headers-v1
+  name: headers-v2
   labels:
     app: headers
-    version: v1
+    version: v2
 spec:
   selector:
     matchLabels:
       app: headers
-      version: v1
+      version: v2
   replicas: 1
   template:
     metadata:
       labels:
         app: headers
-        version: v1
+        version: v2
       annotations:
         sidecar.istio.io/inject: "true"
     spec:
       containers:
         - name: headers
-          image: quay.io/redhattraining/ossm-maven-simplest:1.0
+          image: quay.io/redhattraining/ossm-maven-simplest:2.0
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
