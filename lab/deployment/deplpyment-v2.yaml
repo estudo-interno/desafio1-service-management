@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-v2
+  labels:
+    app: api
+    version: v2
+spec:
+  selector:
+    matchLabels:
+      app: api
+      version: v2
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: api
+        version: v2
+      annotations:
+        sidecar.istio.io/inject: "true"
+    spec:
+      containers:
+        - name: api
+          image: quay.io/leandrop02/ex328-api:2.0
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
