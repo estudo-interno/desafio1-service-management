@@ -10,18 +10,3 @@ spec:
       port: 8080
   selector:
     app: headers
----
-apiVersion: networking.istio.io/v1beta1
-kind: Gateway
-metadata:
-  name: headers-gateway
-spec:
-  selector:
-    istio: ingressgateway
-  servers:
-    - port:
-        number: 80
-        name: http
-        protocol: HTTP
-      hosts:
-        - "*"
